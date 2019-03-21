@@ -1,29 +1,21 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {cities, startingPos} from './testData';
-import {GeneticAlgorithm} from "./services/GeneticAlgorithm";
+import logo from 'src/logo.svg';
+import 'src/App.css';
+import {cities} from 'src/testData';
+import {GeneticAlgorithm} from "src/services/algorithm/GeneticAlgorithm";
+import {Simulation} from "src/component/simulation/Simulation";
 
 class App extends Component {
     render() {
-        const result = new GeneticAlgorithm(startingPos, cities).run();
+        new GeneticAlgorithm(cities).run();
         return (
             <div className="App">
-                {result.result}
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
-                    <p>
-                        Edit <code>src/App.js</code> and save to reload.
-                    </p>
-                    <a
-                        className="App-link"
-                        href="https://reactjs.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Learn React
-                    </a>
                 </header>
+                <div>
+                    <Simulation/>
+                </div>
             </div>
         );
     }

@@ -1,0 +1,16 @@
+.Simulation {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    border: 1px solid black;
+    justify-content: center;
+}
+
+.Inner {
+    flex: 1;
+    min-width: 100%;
+
+    /*flex-shrink: 0;*/
+    /*flex-grow: 1;*/
+}
