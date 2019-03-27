@@ -1,0 +1,23 @@
+.Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--global-extras-color);
+    color: white;
+    cursor: pointer;
+    border: 1px solid var(--global-extras-border-color);
+    border-width: 1px 1px 3px;
+}
+
+.Button:disabled {
+    cursor: default;
+    opacity: 0.3;
+}
+
+.Button:active:not([disabled]) {
+    opacity: 0.8;
+}
+
+.Icon {
+    margin-right: 5px;
+}

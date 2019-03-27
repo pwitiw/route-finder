@@ -1,0 +1,10 @@
+.LabelWithInput {
+    display: inline-flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+.Input {
+    padding: var(--global-padding-sm);
+    margin: var(--global-margin-lg);
+}

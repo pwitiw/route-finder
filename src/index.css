@@ -1,14 +1,34 @@
+:root {
+    --global-padding-sm: 0.25rem; /* 5px; */
+    --global-padding-md: 0.5rem; /* 10px; */
+    --global-padding-lg: 1rem; /* 20px; */
+
+    --global-margin-sm: 0.25rem; /* 5px; */
+    --global-margin-md: 0.5rem; /* 10px; */
+    --global-margin-lg: 1rem; /* 20px; */
+
+    --mobile-screen-max-width: 420px;
+
+    --global-background-color: aliceblue;
+    --global-secondary-color: #e8eeef;
+    --global-extras-color: #1abc9c;
+    --global-extras-border-color: #16a085;
+    --global-font-color: #484848;
+}
+
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    background: var(--global-background-color);
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

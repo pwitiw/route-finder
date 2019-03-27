@@ -1,0 +1,11 @@
+.SearchForm {
+    margin: var(--global-margin-sm);
+    display: flex;
+    flex-direction: column;
+}
+
+.NewCity {
+    display: flex;
+    align-items: center;
+}
+

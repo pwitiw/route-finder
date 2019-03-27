@@ -2,7 +2,9 @@ import {City} from "./services/algorithm/City"
 
 export const cities = [
 
-    // TODO DUZE ODLEGLOSCI
+    // TODO ulice wroclawia przetestowac
+
+    // DUZE ODLEGLOSCI
     // new City("Wrocław", 51.107885, 17.038538),
     // new City("Gdańsk", 54.352025, 18.646638),
     // new City("Moskwa", 55.755826, 37.6173),
@@ -13,7 +15,7 @@ export const cities = [
     // new City("Berlin", 52.520007, 13.404954),
 
 
-    // TODO ZWYKLE
+    // ZWYKLE
     new City("Twardogóra", 51.36499, 17.46841, 2),
     new City("Oleśnica", 51.213435, 17.38985),
     new City("Syców", 51.30787, 17.72016),

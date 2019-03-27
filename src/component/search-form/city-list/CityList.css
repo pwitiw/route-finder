@@ -1,0 +1,32 @@
+.CityList {
+    margin: var(--global-margin-sm) 0 0 0;
+}
+
+.List {
+    overflow-y: scroll;
+    height: 30rem;
+    box-shadow: 0px 0px 20px 0px var(--global-secondary-color);
+    margin-bottom: var(--global-margin-lg);
+}
+
+
+.CityRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--global-margin-md);
+    background: var(--global-secondary-color);
+}
+
+.CityRow > * {
+    margin: var(--global-margin-lg)
+}
+
+.CityRow .ClickableIcon {
+    color: var(--global-extras-color);
+    cursor: pointer;
+}
+
+.ClickableIcon:active {
+    opacity: 0.8;
+}
