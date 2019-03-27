@@ -1,5 +1,5 @@
 .CityList {
-    margin: var(--global-margin-sm) 0 0 0;
+    resize: none;
 }
 
 .List {
@@ -9,17 +9,22 @@
     margin-bottom: var(--global-margin-lg);
 }
 
-
 .CityRow {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin: var(--global-margin-md);
     background: var(--global-secondary-color);
 }
 
 .CityRow > * {
+
     margin: var(--global-margin-lg)
+}
+
+.CityRow > h4 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .CityRow .ClickableIcon {

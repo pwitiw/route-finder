@@ -4,6 +4,7 @@ import {Button} from "src/component/common/button/Button";
 import {CityList} from "src/component/search-form/city-list/CityList";
 import {i18n} from "src/utils/i18n";
 import "src/component/search-form/SearchForm.css";
+import {cities} from "src/testData";
 
 export class SearchForm extends React.Component {
 
@@ -11,7 +12,8 @@ export class SearchForm extends React.Component {
         super(props);
         this.state = {
             newCity: "",
-            cities: []
+            cities: cities.map(city => city.name)
+            // cities: ["wrocław kręta" , "wrocław karmelkowa 5", "wrocław grabiszyńska 255", "siechnice tuwima", "wrocław kmieca 3", "kiełczów", "wrocław zakrzowska", "wrocław tęczowa", "wrocław białych goździków", "szymanów" ]
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleAddLocation = this.handleAddLocation.bind(this);

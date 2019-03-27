@@ -1,8 +1,9 @@
 import React from "react";
 import "src/component/map-view/MapView.css";
-import GoogleMapReact from 'google-map-react'
+import GoogleMap from 'google-map-react'
 import Marker from "src/component/map-view/Marker";
 
+// TODO centrum musi byc wyliczane a nie z dupy
 export class MapView extends React.Component {
 
     constructor(props) {
@@ -11,19 +12,22 @@ export class MapView extends React.Component {
     }
 
     render() {
+        if (!cities || cities.length === 0) {
+            return null;
+        }
         this.state.maps && this.setPolylines();
         const cities = this.props.cities;
         return (
-            <div className="MapView" style={{width: '50%', height: '400px'}}>
-                    <GoogleMapReact
-                        // bootstrapURLKeys={{key: ""}}
-                        center={{lat: cities[0].x, lng: cities[0].y}}
-                        defaultZoom={12}
-                        onGoogleApiLoaded={({map, maps}) => this.setMapAndMaps(map, maps)}>
-                        {cities.map(city => (
-                            <Marker key={city.name} lat={city.x} lng={city.y}/>
-                        ))}
-                    </GoogleMapReact>
+            <div className="MapView">
+                <GoogleMap
+                    // bootstrapURLKeys={{key: ""}}
+                    center={{lat: cities[0].x, lng: cities[0].y}}
+                    defaultZoom={12}
+                    onGoogleApiLoaded={({map, maps}) => this.setMapAndMaps(map, maps)}>
+                    {cities.map(city => (
+                        <Marker key={city.name} lat={city.x} lng={city.y}/>
+                    ))}
+                </GoogleMap>
             </div>
         )
     }
@@ -35,7 +39,8 @@ export class MapView extends React.Component {
     setPolylines() {
         const {map, maps} = this.state;
         const cities = this.props.cities;
-        const path = cities.map((city) => this.toLatLng(city, maps));
+        const path = cities.map((city) => this.toLatLng(city, maps))
+        path.push(path[0]);
         let polyline = new maps.Polyline({
             path: path,
             geodesic: false,
@@ -47,6 +52,7 @@ export class MapView extends React.Component {
         const bounds = new maps.LatLngBounds();
         path.forEach(city => bounds.extend(city));
         map.fitBounds(bounds);
+        maps.Size(300, 300);
     }
 
     toLatLng(city, maps) {

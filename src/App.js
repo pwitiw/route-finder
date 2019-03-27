@@ -4,51 +4,70 @@ import {SearchForm} from "src/component/search-form/SearchForm";
 import {LoadingBanner} from "src/component/common/loading-banner/LoadingBanner";
 import {MapView} from "src/component/map-view/MapView";
 import {GoogleApi} from "src/services/GoogleApi";
+import {GeneticAlgorithm} from "src/services/algorithm/GeneticAlgorithm";
 import {cities} from "src/testData";
+import worker from './app.worker.js';
+import WebWorker from "src/WebWorker";
+
 
 class App extends React.Component {
 
-    //TODO Spis kolejnosci miast
-    // TODO mapa tak samo duza jak lewa
-    // TODO ogranicz za dluga nazwe
+    //TODO lista z kolejnoscia miast
     //TODO wydrukuj?
+
 
     constructor(props) {
         super(props);
         this.state = {
             cities: [],
-            done: true,
         };
         this.handleSearch = this.handleSearch.bind(this);
+        this.webworker = this.webworker.bind(this);
     }
 
     render() {
-        return <div className="App">
-            <div className="Search">
-                <SearchForm onSearch={this.handleSearch}/>
+        const mapContent = this.getMapContent();
+        return (
+            <div className="App">
+                <div className="Form">
+                    <SearchForm onSearch={this.webworker}/>
+                </div>
+                <div className="MapPlaceholder">
+                    {mapContent}
+                </div>
             </div>
-            {this.getMapPlaceholder()}
-        </div>
+        );
     }
 
-    getMapPlaceholder() {
+    getMapContent() {
         let content;
         if (this.state.loading) {
             content = <LoadingBanner/>;
         } else if (this.state.done) {
-            content = <MapView cities={cities}/>;
+            content = <MapView cities={this.state.cities}/>;
         }
-
-        return <div className="MapPlaceholder">{content}</div>
+        return content;
     }
 
-    async handleSearch(cities) {
-        // this.setState({loading: true});
-        this.setState({loading: false, done: true});
-        const result = await GoogleApi.getDetails(cities);
-        console.log(result);
-        // return new GeneticAlgorithm(cities).run();
+    async handleSearch(addresses) {
+        this.setState({loading: true});
+        const cities = await GoogleApi.getDetails(addresses);
+        const result = new GeneticAlgorithm(cities).run();
+        this.setState({cities: result, done: true, loading: false});
+    }
 
+    async webworker(addresses) {
+        this.setState({loading: true});
+        const webWorker = new WebWorker(worker);
+        webWorker.postMessage(() => new GeneticAlgorithm(cities).run());
+        webWorker.onmessage = (event => {
+            this.setState({cities: event.data, done: true, loading: false});
+        });
+        webWorker.onerror = (error) => {
+            console.log("BLĄD");
+            console.info(error);
+            this.setState({loading: false});
+        };
     }
 }
 

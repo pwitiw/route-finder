@@ -1,18 +1,19 @@
 .App {
     display: flex;
-    align-items: flex-start;
-    flex: 3;
-    justify-content: space-around;
-    flex-direction: row;
-    margin: var(--global-margin-lg)
+    flex-wrap: nowrap;
+    align-content: space-between;
+    margin: var(--global-margin-lg);
 }
 
-.SearchForm {
-    flex: 1;
-    text-align: center;
+.Form {
+    min-width: var(--mobile-screen-max-width);
+    max-width: calc(var(--mobile-screen-max-width) * 1.5);
 }
 
 .MapPlaceholder {
-    flex: 2;
-    text-align: center;
+    position: relative;
+    display: flex;
+    flex-grow: 2;
+    justify-content: center;
+    align-items: center;
 }

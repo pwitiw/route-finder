@@ -1,7 +1,7 @@
 .LabelWithInput {
     display: inline-flex;
     flex-direction: row;
-    margin: 10px;
+    margin: var(--global-margin-sm);
 }
 
 .Input {

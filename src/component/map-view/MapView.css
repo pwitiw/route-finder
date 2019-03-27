@@ -1,10 +1,9 @@
 .MapView {
     margin: var(--global-margin-sm);
-    flex: 2 1 auto;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-
-    border: 1px solid black;
-    justify-content: center;
+    border: 2px solid black;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
