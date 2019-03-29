@@ -43,6 +43,31 @@ export default class Individual {
         return new Individual(mutatedRoute);
     };
 
+
+    optimize() {
+        let bestDistance = this.getDistance();
+        let bestRoute = this;
+        for (let i = 0; i < this.dna.length - 1; i++) {
+            for (let j = i + 1; j < this.dna.length; j++) {
+                const newRoute = this.swap2Opt(this.dna, i, j);
+                const newDistance = newRoute.getDistance();
+                if (newDistance < bestDistance) {
+                    bestDistance = newDistance;
+                    bestRoute = newRoute;
+                }
+            }
+        }
+        return bestRoute;
+    }
+
+    swap2Opt(route, i, k) {
+        const reversedPart = route.slice(i, k).reverse();
+        const tail = route.slice(k);
+        const head = route.slice(0, i);
+        const result = head.concat(reversedPart).concat(tail);
+        return new Individual(result);
+    }
+
     print() {
         const cityNames = this.dna.map((city) => city.name).join(", ");
         const distance = this.getDistance();

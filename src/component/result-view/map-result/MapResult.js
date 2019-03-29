@@ -1,10 +1,10 @@
 import React from "react";
-import "src/component/map-view/MapView.css";
+import "src/component/result-view/map-result/MapResult.css";
 import GoogleMap from 'google-map-react'
-import Marker from "src/component/map-view/Marker";
+import Marker from "src/component/result-view/map-result/Marker";
+import GoogleApi from "src/services/GoogleApi";
 
-// TODO centrum musi byc wyliczane a nie z dupy
-export class MapView extends React.Component {
+export class MapResult extends React.Component {
 
     constructor(props) {
         super(props);
@@ -12,15 +12,15 @@ export class MapView extends React.Component {
     }
 
     render() {
-        if (!cities || cities.length === 0) {
+        if (this.props.cities.length === 0) {
             return null;
         }
         this.state.maps && this.setPolylines();
         const cities = this.props.cities;
         return (
-            <div className="MapView">
+            <div className="MapResult">
                 <GoogleMap
-                    // bootstrapURLKeys={{key: ""}}
+                    // bootstrapURLKeys={{key: GoogleApi.KEY}}
                     center={{lat: cities[0].x, lng: cities[0].y}}
                     defaultZoom={12}
                     onGoogleApiLoaded={({map, maps}) => this.setMapAndMaps(map, maps)}>

@@ -1,0 +1,5 @@
+.MapResult {
+    position: relative;
+    display: flex;
+    flex:3;
+}

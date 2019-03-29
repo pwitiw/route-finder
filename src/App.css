@@ -1,19 +1,7 @@
 .App {
     display: flex;
-    flex-wrap: nowrap;
-    align-content: space-between;
-    margin: var(--global-margin-lg);
+    margin: var(--global-margin-sm);
+    max-height: 95vh;
+    height: 95vh;
 }
 
-.Form {
-    min-width: var(--mobile-screen-max-width);
-    max-width: calc(var(--mobile-screen-max-width) * 1.5);
-}
-
-.MapPlaceholder {
-    position: relative;
-    display: flex;
-    flex-grow: 2;
-    justify-content: center;
-    align-items: center;
-}

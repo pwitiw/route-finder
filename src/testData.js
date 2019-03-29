@@ -1,13 +1,7 @@
 import {City} from "./services/algorithm/City"
 
 export const cities = [
-
-    // TODO ulice wroclawia przetestowac
-    //TODO co jesli jest jakas mala wioseczka ktorych jest x
-    // TODO dodaj na enter
-
-
-    // DUZE ODLEGLOSCI
+        // DUZE ODLEGLOSCI
     // new City("Wrocław", 51.107885, 17.038538),
     // new City("Gdańsk", 54.352025, 18.646638),
     // new City("Moskwa", 55.755826, 37.6173),
@@ -17,18 +11,17 @@ export const cities = [
     // new City("Barcelona", 41.385064, 2.173403),
     // new City("Berlin", 52.520007, 13.404954),
 
-
     // ZWYKLE
     new City("Twardogóra", 51.36499, 17.46841, 2),
     new City("Oleśnica", 51.213435, 17.38985),
     new City("Syców", 51.30787, 17.72016),
     new City("Bierutów", 51.12444, 17.54603),
-    // new City("Namysłow", 51.07588, 17.72244),
-    // new City("Kępno", 51.278136, 17.989059),
-    // new City("Długołęka", 51.193377, 17.206483),
-    // new City("Międzybórz", 51.396248, 17.666034),
-    // new City("Wrocław", 51.107885, 17.038538),
-    // new City("Milicz", 51.527596, 17.271212),
+    new City("Namysłow", 51.07588, 17.72244),
+    new City("Kępno", 51.278136, 17.989059),
+    new City("Długołęka", 51.193377, 17.206483),
+    new City("Międzybórz", 51.396248, 17.666034),
+    new City("Wrocław", 51.107885, 17.038538),
+    new City("Milicz", 51.527596, 17.271212),
     //CD
     // new City("Nysa", 50.4822855, 17.3295861),
     // new City("Częstochowa", 50.8118195, 19.1203094),
@@ -40,4 +33,10 @@ export const cities = [
     // new City("Prudnik", 50.3206779, 17.5742265),
     // new City("Katowice", 50.26489189999999, 19.0237815),
     // new City("Oława", 50.9459276, 17.2924017),
+
+    // new City("Rybnik", 50.102174, 18.546285),
+    // new City("Kraków", 50.06465, 19.94498),
+    // new City("Jastrzębie-Zdrój", 49.945421, 18.61011),
+    // new City("Racibórz",50.091523, 18.219917),
+    // new City("Kłodzko", 50.434564, 16.661394)
 ];

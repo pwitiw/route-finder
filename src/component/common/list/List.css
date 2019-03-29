@@ -1,0 +1,29 @@
+.List {
+    overflow-y: auto;
+    box-shadow: 0px 0px 10px 0px var(--global-secondary-color);
+}
+
+.Row {
+    display: flex;
+    justify-content: space-between;
+    margin: var(--global-margin-sm);
+    background: var(--global-secondary-color);
+    padding: var(--global-margin-lg);
+}
+
+.Row > li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    list-style-position: inside;
+}
+
+.Row .Icon {
+    color: var(--global-extras-color);
+    cursor: pointer;
+    margin-left: var(--global-margin-md);
+}
+
+.Row .Icon:active {
+    opacity: 0.8;
+}

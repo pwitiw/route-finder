@@ -12,7 +12,10 @@ export class Population {
     }
 
     generate(size, seed) {
-        return Array(size).fill(null).map(() => new Individual(this.shuffle(seed, this.fisherSwap)));
+        const startingPop = new Individual(seed);
+        const array = Array(size - 1).fill(null).map(() => new Individual(this.shuffle(seed, this.fisherSwap)));
+        array.push(startingPop);
+        return array;
     };
 
     nextGeneration() {
@@ -35,10 +38,11 @@ export class Population {
         const dad = this.select();
         const possiblyCrossed = Math.random() < this.probCross ? this.crossover(mom, dad) : [mom, dad];
 
-        const mutatedChildren = possiblyCrossed.map(individual => {
-            return individual.mutate(this.probMuta);
-        });
-        return mutatedChildren;
+        let children = possiblyCrossed
+            .map(individual => individual.mutate(this.probMuta))
+            .map(individual => individual.optimize());
+
+        return children;
     };
 
     select() {
@@ -113,4 +117,5 @@ export class Population {
         array[index] = array[rand];
         array[rand] = temp;
     }
+
 }

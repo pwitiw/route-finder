@@ -2,72 +2,72 @@ import React from 'react';
 import 'src/App.css';
 import {SearchForm} from "src/component/search-form/SearchForm";
 import {LoadingBanner} from "src/component/common/loading-banner/LoadingBanner";
-import {MapView} from "src/component/map-view/MapView";
-import {GoogleApi} from "src/services/GoogleApi";
-import {GeneticAlgorithm} from "src/services/algorithm/GeneticAlgorithm";
-import {cities} from "src/testData";
-import worker from './app.worker.js';
-import WebWorker from "src/WebWorker";
+import MyWorker from "./app.worker.js";
+import {ResultView} from "src/component/result-view/ResultView";
 
+
+// TODO dodaj na enter
+// TODO cache
+// TODO ulice wroclawia przetestowac
 
 class App extends React.Component {
-
-    //TODO lista z kolejnoscia miast
-    //TODO wydrukuj?
-
-
     constructor(props) {
         super(props);
         this.state = {
             cities: [],
+            // processing: true
         };
         this.handleSearch = this.handleSearch.bind(this);
-        this.webworker = this.webworker.bind(this);
+        this.handleAbort = this.handleAbort.bind(this);
+        this.handleRepeat = this.handleRepeat.bind(this);
     }
 
     render() {
-        const mapContent = this.getMapContent();
+        const mapContent = this.getResultContent();
         return (
             <div className="App">
-                <div className="Form">
-                    <SearchForm onSearch={this.webworker}/>
-                </div>
-                <div className="MapPlaceholder">
-                    {mapContent}
-                </div>
+                <SearchForm onSearch={this.handleSearch} processing={this.state.processing} onAbort={this.handleAbort}/>
+                {mapContent}
             </div>
         );
     }
 
-    getMapContent() {
+    getResultContent() {
         let content;
-        if (this.state.loading) {
+        if (this.state.processing) {
             content = <LoadingBanner/>;
         } else if (this.state.done) {
-            content = <MapView cities={this.state.cities}/>;
+            content = <ResultView cities={this.state.cities} onRepeat={this.handleRepeat}/>;
         }
-        return content;
+        return content
     }
 
-    async handleSearch(addresses) {
-        this.setState({loading: true});
-        const cities = await GoogleApi.getDetails(addresses);
-        const result = new GeneticAlgorithm(cities).run();
-        this.setState({cities: result, done: true, loading: false});
+    handleRepeat() {
+        this.handleSearch(this.state.cities);
     }
 
-    async webworker(addresses) {
-        this.setState({loading: true});
-        const webWorker = new WebWorker(worker);
-        webWorker.postMessage(() => new GeneticAlgorithm(cities).run());
-        webWorker.onmessage = (event => {
-            this.setState({cities: event.data, done: true, loading: false});
+    async handleSearch(cities) {
+
+        // const result = new GeneticAlgorithm(cities).run();
+        // this.setState({cities: result, done: true, processing: false});
+        this.setState({processing: true});
+        // const cities = await GoogleApi.getDetails(addresses);
+        this.webWorker = new MyWorker();
+        this.webWorker.postMessage(cities);
+        this.webWorker.onmessage = (event => {
+            this.setState({cities: event.data, done: true, processing: false});
+        this.webWorker.terminate();
         });
-        webWorker.onerror = (error) => {
-            console.log("BLĄD");
+        this.webWorker.onerror = (error) => {
             console.info(error);
-            this.setState({loading: false});
+            this.setState({processing: false});
+            this.webWorker.terminate();
         };
+    }
+
+    handleAbort() {
+        this.webWorker && this.webWorker.terminate();
+        this.setState({processing: false, done: false})
     }
 }
 

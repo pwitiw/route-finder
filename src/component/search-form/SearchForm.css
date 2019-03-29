@@ -1,11 +1,12 @@
 .SearchForm {
-    margin: var(--global-margin-sm);
     display: flex;
     flex-direction: column;
+    margin: var(--global-margin-sm);
+    margin-right: var(--global-margin-lg);
+    max-width: var(--mobile-screen-max-width);
 }
 
-.NewCity {
+.SearchForm .Form {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
 }
-

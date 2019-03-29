@@ -1,10 +1,10 @@
 .LabelWithInput {
-    display: inline-flex;
-    flex-direction: row;
-    margin: var(--global-margin-sm);
+    display: flex;
+    align-items: center;
 }
 
-.Input {
-    padding: var(--global-padding-sm);
-    margin: var(--global-margin-lg);
+.LabelWithInput .Input {
+    padding-left: var(--global-padding-sm);
+    padding-right: var(--global-padding-sm);
+    margin-left: var(--global-margin-sm);
 }

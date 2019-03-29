@@ -2,11 +2,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--global-extras-color);
     color: white;
     cursor: pointer;
-    border: 1px solid var(--global-extras-border-color);
+    border: 1px solid;
     border-width: 1px 1px 3px;
+    margin: var(--global-margin-sm);
+}
+
+.Warning {
+    background:#dc3545;
+    border-color: #dc3545;
+}
+
+.Info {
+    border-color: var(--global-extras-border-color);
+    background: var(--global-extras-color);
 }
 
 .Button:disabled {

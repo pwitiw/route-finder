@@ -1,0 +1,18 @@
+.ResultView {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: var(--global-margin-sm);
+    margin-left: var(--global-margin-lg);
+}
+
+.ResultView .Title {
+    align-self: center;
+    justify-self: center;
+    margin-bottom: var(--global-margin-md);
+}
+
+.ResultView .Content {
+    height:90%;
+    display: flex;
+}

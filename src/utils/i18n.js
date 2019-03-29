@@ -1,12 +1,13 @@
 export const i18n = {
     add: "Dodaj",
     search: "Szukaj trasy",
+    abort: "Przerwij",
+    repeat:"Ponów wyszukiwanie",
     cityForm: {
         address: "Adres",
-        cities: "Miasta"
     },
-    map: {
-        test: "test"
+    result: {
+        title: "Wynik wyszukiwania"
     }
 
 };
