@@ -1,5 +1,6 @@
 import {requestService} from "src/services/RequestService";
 import {City} from "src/services/algorithm/City";
+import {AddressUtils} from "src/services/AddressUtils";
 
 class Cache {
     constructor() {
@@ -26,14 +27,18 @@ export default class GoogleApi {
     }
 
     static async getAddressDetail(address) {
-        let response = this.cache.get(address);
+        const cityName = address.name;
+        let response = this.cache.get(AddressUtils.normalize(cityName));
         if (!response) {
-            response = await requestService.get("https://maps.googleapis.com/maps/api/geocode/json?region=pl&key" + GoogleApi.KEY + "=&address=" + address);
-            this.cache.put(address, response);
+            response = await requestService.get("https://maps.googleapis.com/maps/api/geocode/json?region=pl&key=" + GoogleApi.KEY + "&address=" + cityName);
+            response = await response.json();
+            console.log("Call do api");
+            this.cache.put(AddressUtils.normalize(cityName), response);
+        } else {
+            console.log("pomijamy");
         }
-        const body = await response.json();
-        const {lat, lng} = body.results[0].geometry.location;
-        const name = body.results[0].formatted_address;
+        const {lat, lng} = response.results[0].geometry.location;
+        const name = response.results[0].formatted_address;
         return new City(name, lat, lng);
     }
 }

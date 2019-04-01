@@ -20,7 +20,7 @@ export class MapResult extends React.Component {
         return (
             <div className="MapResult">
                 <GoogleMap
-                    // bootstrapURLKeys={{key: GoogleApi.KEY}}
+                    bootstrapURLKeys={{key: GoogleApi.KEY}}
                     center={{lat: cities[0].x, lng: cities[0].y}}
                     defaultZoom={12}
                     onGoogleApiLoaded={({map, maps}) => this.setMapAndMaps(map, maps)}>

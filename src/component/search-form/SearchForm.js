@@ -4,8 +4,8 @@ import {Button, ButtonType} from "src/component/common/button/Button";
 import {List} from "src/component/common/list/List";
 import {i18n} from "src/utils/i18n";
 import "src/component/search-form/SearchForm.css";
-import {cities} from "src/testData";
 import {City} from "src/services/algorithm/City";
+import {AddressUtils} from "src/services/AddressUtils";
 
 export class SearchForm extends React.Component {
 
@@ -13,7 +13,7 @@ export class SearchForm extends React.Component {
         super(props);
         this.state = {
             newCity: "",
-            cities: cities
+            cities: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleAddLocation = this.handleAddLocation.bind(this);
@@ -45,7 +45,7 @@ export class SearchForm extends React.Component {
     createActionButton() {
         let button;
         if (!this.props.processing) {
-            const searchBtnDisabled = this.state.cities.length === 0;
+            const searchBtnDisabled = this.state.cities.length < 1;
             button = <Button value={i18n.search}
                              icon="route"
                              disabled={searchBtnDisabled}
@@ -71,10 +71,14 @@ export class SearchForm extends React.Component {
     }
 
     handleAddLocation() {
-        this.setState({
-            newCity: "",
-            cities: this.state.cities.concat(new City(this.state.newCity))
-        });
+        const newCity = this.state.newCity.trim();
+        const exists = this.state.cities.filter(city => AddressUtils.areEqual(city.name, newCity)).length > 0;
+        if (newCity !== "" && !exists) {
+            this.setState({
+                cities: this.state.cities.concat(new City(newCity))
+            });
+        }
+        this.setState({newCity: ""});
     }
 
     handleSearch() {

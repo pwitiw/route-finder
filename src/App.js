@@ -4,6 +4,8 @@ import {SearchForm} from "src/component/search-form/SearchForm";
 import {LoadingBanner} from "src/component/common/loading-banner/LoadingBanner";
 import MyWorker from "./app.worker.js";
 import {ResultView} from "src/component/result-view/ResultView";
+import {GeneticAlgorithm} from "src/services/algorithm/GeneticAlgorithm";
+import GoogleApi from "src/services/GoogleApi";
 
 // TODO przetestowac cache
 // TODO cache - normalizacja polskich znakow: ł - l, ą -a, ż-z.
@@ -15,7 +17,6 @@ class App extends React.Component {
         super(props);
         this.state = {
             cities: [],
-            // processing: true
         };
         this.handleSearch = this.handleSearch.bind(this);
         this.handleAbort = this.handleAbort.bind(this);
@@ -46,12 +47,9 @@ class App extends React.Component {
         this.handleSearch(this.state.cities);
     }
 
-    async handleSearch(cities) {
-
-        // const result = new GeneticAlgorithm(cities).run();
-        // this.setState({cities: result, done: true, processing: false});
+    async handleSearch(addresses) {
         this.setState({processing: true});
-        // const cities = await GoogleApi.getDetails(addresses);
+        const cities = await GoogleApi.getDetails(addresses);
         this.webWorker = new MyWorker();
         this.webWorker.postMessage(cities);
         this.webWorker.onmessage = (event => {

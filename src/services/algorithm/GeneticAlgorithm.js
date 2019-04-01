@@ -1,17 +1,20 @@
 import {Population} from "./Population";
 
-const MAX_GENERATIONS = 500;
+const MAX_GENERATIONS = 1000;
 const POPULATION = 50;
-const CROSSOVER_PROBABILITY = 0.1;
+const CROSSOVER_PROBABILITY = 0.7;
 const MUTATION_PROBABILITY = 0.1;
 
 export class GeneticAlgorithm {
 
     constructor(cities) {
-        this.cities = cities;
+        this.cities = cities ? cities : [];
     }
 
     run() {
+        if (this.cities.length < 4) {
+            return this.cities;
+        }
         let population = new Population(POPULATION, this.cities, CROSSOVER_PROBABILITY, MUTATION_PROBABILITY);
         let bestScore = population.getFittest();
         console.log(bestScore);
