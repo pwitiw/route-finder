@@ -4,14 +4,9 @@ import {SearchForm} from "src/component/search-form/SearchForm";
 import {LoadingBanner} from "src/component/common/loading-banner/LoadingBanner";
 import MyWorker from "./app.worker.js";
 import {ResultView} from "src/component/result-view/ResultView";
-import {GeneticAlgorithm} from "src/services/algorithm/GeneticAlgorithm";
 import GoogleApi from "src/services/GoogleApi";
 
-// TODO przetestowac cache
-// TODO cache - normalizacja polskich znakow: ł - l, ą -a, ż-z.
 // TODO wyszukiwania miast przy dodawaniu
-// TODO ulice wroclawia przetestowac
-
 class App extends React.Component {
     constructor(props) {
         super(props);

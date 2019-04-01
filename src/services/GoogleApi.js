@@ -23,7 +23,7 @@ export default class GoogleApi {
     static async getDetails(addresses) {
         const promises = addresses.map((address) => this.getAddressDetail(address));
         const result = await Promise.all(promises);
-        return result;
+        return result.filter(result => result);
     }
 
     static async getAddressDetail(address) {
@@ -32,10 +32,10 @@ export default class GoogleApi {
         if (!response) {
             response = await requestService.get("https://maps.googleapis.com/maps/api/geocode/json?region=pl&key=" + GoogleApi.KEY + "&address=" + cityName);
             response = await response.json();
-            console.log("Call do api");
             this.cache.put(AddressUtils.normalize(cityName), response);
-        } else {
-            console.log("pomijamy");
+        }
+        if (response.results.length === 0) {
+            return null;
         }
         const {lat, lng} = response.results[0].geometry.location;
         const name = response.results[0].formatted_address;
