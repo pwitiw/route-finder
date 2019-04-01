@@ -14,7 +14,7 @@ export const Button = (props) => {
     return (
         <button className={className}
                 disabled={props.disabled}
-                type="submit"
+                type="button"
                 onClick={props.onClick}>
             {icon && <FontAwesomeIcon size="2x" className="Icon" icon={icon}/>}
             <h3>{props.value}</h3>

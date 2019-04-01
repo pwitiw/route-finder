@@ -26,7 +26,7 @@ export class SearchForm extends React.Component {
         const addBtnDisabled = this.state.newCity.length === 0;
         return (
             <div className="SearchForm">
-                <form className="Form">
+                <form className="Form" onSubmit={this.handleAddLocation}>
                     <LabelWithInput label={i18n.cityForm.address}
                                     value={this.state.newCity}
                                     onChange={this.handleChange}/>
@@ -45,7 +45,7 @@ export class SearchForm extends React.Component {
     createActionButton() {
         let button;
         if (!this.props.processing) {
-            const searchBtnDisabled = this.state.cities.length < 1;
+            const searchBtnDisabled = this.state.cities.length < 2;
             button = <Button value={i18n.search}
                              icon="route"
                              disabled={searchBtnDisabled}
@@ -70,7 +70,8 @@ export class SearchForm extends React.Component {
         });
     }
 
-    handleAddLocation() {
+    handleAddLocation(event) {
+        event.preventDefault();
         const newCity = this.state.newCity.trim();
         const exists = this.state.cities.filter(city => AddressUtils.areEqual(city.name, newCity)).length > 0;
         if (newCity !== "" && !exists) {
