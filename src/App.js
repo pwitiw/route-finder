@@ -5,9 +5,9 @@ import {LoadingBanner} from "src/component/common/loading-banner/LoadingBanner";
 import MyWorker from "./app.worker.js";
 import {ResultView} from "src/component/result-view/ResultView";
 
-
-// TODO dodaj na enter
-// TODO cache
+// TODO przetestowac cache
+// TODO cache - normalizacja polskich znakow: ł - l, ą -a, ż-z.
+// TODO wyszukiwania miast przy dodawaniu
 // TODO ulice wroclawia przetestowac
 
 class App extends React.Component {
@@ -56,7 +56,7 @@ class App extends React.Component {
         this.webWorker.postMessage(cities);
         this.webWorker.onmessage = (event => {
             this.setState({cities: event.data, done: true, processing: false});
-        this.webWorker.terminate();
+            this.webWorker.terminate();
         });
         this.webWorker.onerror = (error) => {
             console.info(error);

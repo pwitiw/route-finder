@@ -39,4 +39,6 @@ export const cities = [
     // new City("Jastrzębie-Zdrój", 49.945421, 18.61011),
     // new City("Racibórz",50.091523, 18.219917),
     // new City("Kłodzko", 50.434564, 16.661394)
+    // cities: ["wrocław kręta" , "wrocław karmelkowa 5", "wrocław grabiszyńska 255", "siechnice tuwima", "wrocław kmieca 3", "kiełczów", "wrocław zakrzowska", "wrocław tęczowa", "wrocław białych goździków", "szymanów" ]
+
 ];

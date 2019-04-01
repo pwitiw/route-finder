@@ -14,7 +14,6 @@ export class SearchForm extends React.Component {
         this.state = {
             newCity: "",
             cities: cities
-            // cities: ["wrocław kręta" , "wrocław karmelkowa 5", "wrocław grabiszyńska 255", "siechnice tuwima", "wrocław kmieca 3", "kiełczów", "wrocław zakrzowska", "wrocław tęczowa", "wrocław białych goździków", "szymanów" ]
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleAddLocation = this.handleAddLocation.bind(this);
@@ -25,9 +24,6 @@ export class SearchForm extends React.Component {
     render() {
         const cities = this.state.cities.map(city => city.name);
         const addBtnDisabled = this.state.newCity.length === 0;
-        const submit = (e) => {
-        };
-
         return (
             <div className="SearchForm">
                 <form className="Form">
