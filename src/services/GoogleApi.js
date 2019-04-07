@@ -27,6 +27,9 @@ export default class GoogleApi {
     }
 
     static async getAddressDetail(address) {
+        if (AddressUtils.normalize(address.name) === AddressUtils.normalize("Twardogóra")) {
+            return new City("Twardogóra", 51.36499, 17.46841, 2);
+        }
         const cityName = address.name;
         let response = this.cache.get(AddressUtils.normalize(cityName));
         if (!response) {

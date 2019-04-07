@@ -13,12 +13,14 @@ export class SearchForm extends React.Component {
         super(props);
         this.state = {
             newCity: "",
+            startingPos: "Twardogóra",
             cities: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleAddLocation = this.handleAddLocation.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
+        this.handleStartingPosChange = this.handleStartingPosChange.bind(this);
     }
 
     render() {
@@ -26,6 +28,9 @@ export class SearchForm extends React.Component {
         const addBtnDisabled = this.state.newCity.length === 0;
         return (
             <div className="SearchForm">
+                <LabelWithInput label={i18n.cityForm.startingPoing}
+                                value={this.state.startingPos}
+                                onChange={this.handleStartingPosChange}/>
                 <form className="Form" onSubmit={this.handleAddLocation}>
                     <LabelWithInput label={i18n.cityForm.address}
                                     value={this.state.newCity}
@@ -35,6 +40,7 @@ export class SearchForm extends React.Component {
                             disabled={addBtnDisabled}
                             onClick={this.handleAddLocation}/>
                 </form>
+
                 <List cities={cities}
                       onRemove={this.handleRemove}/>
                 {this.createActionButton()}
@@ -45,7 +51,7 @@ export class SearchForm extends React.Component {
     createActionButton() {
         let button;
         if (!this.props.processing) {
-            const searchBtnDisabled = this.state.cities.length < 2;
+            const searchBtnDisabled = this.state.cities.length < 3;
             button = <Button value={i18n.search}
                              icon="route"
                              disabled={searchBtnDisabled}
@@ -61,6 +67,10 @@ export class SearchForm extends React.Component {
 
     handleChange(event) {
         this.setState({newCity: event.target.value});
+    }
+
+    handleStartingPosChange(event) {
+        this.setState({startingPos: event.target.value});
     }
 
     handleRemove(indexToRemove) {
@@ -83,6 +93,6 @@ export class SearchForm extends React.Component {
     }
 
     handleSearch() {
-        this.props.onSearch(this.state.cities);
+        this.props.onSearch([].concat(new City(this.state.startingPos), this.state.cities));
     }
 }

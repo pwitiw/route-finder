@@ -6,7 +6,6 @@ import MyWorker from "./app.worker.js";
 import {ResultView} from "src/component/result-view/ResultView";
 import GoogleApi from "src/services/GoogleApi";
 
-// TODO wyszukiwania miast przy dodawaniu
 class App extends React.Component {
     constructor(props) {
         super(props);
