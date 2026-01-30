@@ -10,7 +10,7 @@
     "google-map-react": "^1.1.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "3.3.0",
+    "react-scripts": "5.0.1",
     "redux": "^4.0.1"
   },
   "scripts": {
